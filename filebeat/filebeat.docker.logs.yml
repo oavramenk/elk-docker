@@ -1,36 +1,17 @@
 #================================== Description ========================================
 # Filebeat Config to send Elasticsearch/Logstash/Kibana in a docker host to Elasticsea-
 # sh cluster.
-
-name: filebeat-docker-logs-shipper
-
-filebeat.config:
-  modules:
-    path: ${path.config}/modules.d/*.yml
-    reload.enabled: false
+filebeat.inputs:
+- type: log
+  paths:
+    - /var/log/system.log
+    - /var/log/system
+    - /my-logs/log
+  fields_under_root: true
 
 #================================ Autodiscover =======================================
 # Autodiscover all containers with elasticsearch images, and add an separate input for
 # each container and log type.
-filebeat.autodiscover:
-  providers:
-    - type: docker
-      templates:
-        - condition:
-            and:
-             - not.contains:
-                docker.container.image: elasticsearch
-             - not.contains:
-                docker.container.image: logstash
-             - not.contains:
-                docker.container.image: kibana
-          config:
-            - type: container
-              paths:
-                - /var/lib/docker/containers/${data.docker.container.id}/*.log
-
-processors:
-  - add_cloud_metadata: ~
 
 # Output to Logstash
 output.logstash:

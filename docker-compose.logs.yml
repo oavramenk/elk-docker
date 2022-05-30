@@ -22,3 +22,4 @@ services:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - filebeat-data:/var/lib/filebeat/data
+      - /home/ec2-user/elk/test:/my-logs/log
