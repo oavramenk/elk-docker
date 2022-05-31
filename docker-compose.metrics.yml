@@ -1,5 +1,8 @@
 version: "3.5"
 
+volumes:
+  metricbeat:
+
 services:
 
   metricbeat:
