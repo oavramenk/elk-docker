@@ -30,9 +30,9 @@ setup:
     host: 'https://${KIBANA_HOST_PORT}'
     username: '${ELASTIC_USERNAME}'
     password: '${ELASTIC_PASSWORD}'
-  ssl:
-    enabled: true
-    verification_mode: none
+    ssl:
+      enabled: true
+      verification_mode: none
 
 setup.dashboards:
   enabled: true
