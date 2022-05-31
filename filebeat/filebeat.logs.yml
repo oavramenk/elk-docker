@@ -22,7 +22,9 @@ filebeat.inputs:
 - type: log
   paths:
     - /my-logs/log
-  # fields_under_root: true
+  fields:
+    event.dataset: my-app 
+    # fields_under_root: true
   json:
     keys_under_root: true
     overwrite_keys: true
@@ -53,7 +55,7 @@ output.logstash:
 #=================================== Kibana ==========================================
 setup:
   kibana:
-    host: 'https://${KIBANA_HOST_PORT}'
+    host: '${KIBANA_HOST_PORT}'
     username: '${ELASTIC_USERNAME}'
     password: '${ELASTIC_PASSWORD}'
     ssl:

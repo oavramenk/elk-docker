@@ -21,6 +21,6 @@ services:
       ELASTIC_USERNAME: ${ELASTIC_USERNAME}
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
       KIBANA_HOST_PORT: ${KIBANA_HOST_PUB}:${KIBANA_PORT_PUB}
-      ELASTICSEARCH_HOST_PORT: https://${ELASTICSEARCH_HOST_PUB}:${ELASTICSEARCH_PORT_PUB}
+      ELASTICSEARCH_HOST_PORT: ${ELASTICSEARCH_HOST_PUB}:${ELASTICSEARCH_PORT_PUB}
     # disable strict permission checks
-    command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
+    # command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
