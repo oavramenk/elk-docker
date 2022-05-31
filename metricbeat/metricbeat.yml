@@ -60,9 +60,9 @@ output:
       verification_mode: none
 
 #============================== Dashboards =====================================
-setup.dashboards:
-  enabled: true
-  # index: "${LOCAL_HOSTNAME}-logs"
+# setup.dashboards:
+#   enabled: true
+#   # index: "${LOCAL_HOSTNAME}-logs"
 
 #============================== Kibana =========================================
 setup:
