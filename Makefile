@@ -3,7 +3,7 @@
 COMPOSE_ALL_FILES := -f docker-compose.yml -f docker-compose.monitor.yml -f docker-compose.tools.yml -f docker-compose.nodes.yml -f docker-compose.logs.yml
 COMPOSE_MONITORING := -f docker-compose.yml -f docker-compose.monitor.yml
 COMPOSE_LOGGING := -f docker-compose.yml -f docker-compose.logs.yml
-COMPOSE_LOGGING_MONITORING := -f docker-compose.yml -f docker-compose.logs.yml -f docker-compose.metrics.yml
+COMPOSE_LOGGING_MONITORING := -f docker-compose.logs.yml -f docker-compose.metrics.yml
 COMPOSE_TOOLS := -f docker-compose.yml -f docker-compose.tools.yml
 COMPOSE_NODES := -f docker-compose.yml -f docker-compose.nodes.yml
 ELK_SERVICES   := elasticsearch logstash kibana
