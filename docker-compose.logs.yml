@@ -8,7 +8,7 @@ services:
   # Docker Logs Shipper ------------------------------
   filebeat:
     image: docker.elastic.co/beats/filebeat:${ELK_VERSION}
-    hostname: "${HOSTNAME}-logs"
+    hostname: "${HOSTNAME}-filebeat"
     restart: always
     # -e flag to log to stderr and disable syslog/file output
     command: -e --strict.perms=false
@@ -23,5 +23,7 @@ services:
       - ./filebeat/filebeat.logs.yml:/usr/share/filebeat/filebeat.yml:ro
       # - /var/lib/docker/containers:/var/lib/docker/containers:ro
       # - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/log/:/var/log/:ro
+      - /var/log/audit/:/var/log/audit/:ro
       - filebeat-data:/var/lib/filebeat/data
       - /home/ec2-user/test:/my-logs/log
