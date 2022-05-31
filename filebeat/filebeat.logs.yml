@@ -27,10 +27,10 @@ output.logstash:
 # This requires a Kibana endpoint configuration.
 setup:
   kibana:
-    host: '${KIBANA_HOST_PORT}'
+    host: 'https://${KIBANA_HOST_PORT}'
     username: '${ELASTIC_USERNAME}'
     password: '${ELASTIC_PASSWORD}'
-    
+
 setup.dashboards:
   enabled: true
   # index: "${LOCAL_HOSTNAME}-logs"
@@ -46,7 +46,7 @@ setup.dashboards:
 xpack.monitoring:
   enabled: true
   elasticsearch:
-    hosts: '${ELASTICSEARCH_HOST_PORT}'
+    hosts: 'https://${ELASTICSEARCH_HOST_PORT}'
     username: '${ELASTIC_USERNAME}'
     password: '${ELASTIC_PASSWORD}'
 
