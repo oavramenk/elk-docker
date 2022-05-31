@@ -50,10 +50,14 @@ processors:
     netinfo.enabled: true
 
 #========================== Elasticsearch output ===============================
-output.elasticsearch:
-  hosts: ["https://${ELASTICSEARCH_HOST_PORT}"]
-  username: ${ELASTIC_USERNAME}
-  password: ${ELASTIC_PASSWORD}
+output:
+  elasticsearch:
+    hosts: ["https://${ELASTICSEARCH_HOST_PORT}"]
+    username: ${ELASTIC_USERNAME}
+    password: ${ELASTIC_PASSWORD}
+  ssl:
+    enabled: true
+    verification_mode: none
 
 #============================== Dashboards =====================================
 setup.dashboards:
@@ -61,10 +65,14 @@ setup.dashboards:
   # index: "${LOCAL_HOSTNAME}-logs"
 
 #============================== Kibana =========================================
-setup.kibana:
-  host: "https://${KIBANA_HOST_PORT}"
-  username: ${ELASTIC_USERNAME}
-  password: ${ELASTIC_PASSWORD}
+setup:
+  kibana:
+    host: "https://${KIBANA_HOST_PORT}"
+    username: ${ELASTIC_USERNAME}
+    password: ${ELASTIC_PASSWORD}
+  ssl:
+    enabled: true
+    verification_mode: none
 
 #============================== Xpack Monitoring ===============================
 xpack.monitoring:
