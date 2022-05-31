@@ -18,7 +18,7 @@ services:
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
       KIBANA_HOST_PORT: https://${KIBANA_HOST_PUB}:${KIBANA_PORT_PUB}
       LOGSTASH_HOST_PORT: ${LOGSTASH_HOST_PUB}:${LOGSTASH_PORT_PUB}
-      ELASTICSEARCH_HOST_PORT: ${ELASTICSEARCH_HOST_PUB}:${ELASTICSEARCH_PORT_PUB}
+      ELASTICSEARCH_HOST_PORT: https://${ELASTICSEARCH_HOST_PUB}:${ELASTICSEARCH_PORT_PUB}
     volumes:
       - ./filebeat/filebeat.logs.yml:/usr/share/filebeat/filebeat.yml:ro
       # - /var/lib/docker/containers:/var/lib/docker/containers:ro
