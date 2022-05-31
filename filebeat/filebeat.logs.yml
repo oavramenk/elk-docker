@@ -4,8 +4,6 @@
 filebeat.inputs:
 - type: log
   paths:
-    - /var/log/system.log
-    - /var/log/system
     - /my-logs/log
   fields_under_root: true
 
@@ -15,7 +13,13 @@ filebeat.inputs:
 
 # Output to Logstash
 output.logstash:
-  hosts: ["logstash:5044"]
+  hosts: ["${LOGSTASH_HOST_PORT}"]
+
+# Change index
+
+# output.elasticsearch.index: "${LOCAL_HOSTNAME}-logs"
+# setup.template.name: "${LOCAL_HOSTNAME}-logs"
+# setup.template.pattern: "${LOCAL_HOSTNAME}-logs"
 
 #=================================== Kibana ==========================================
 # Enable setting up Kibana
@@ -26,6 +30,10 @@ setup:
     host: '${KIBANA_HOST_PORT}'
     username: '${ELASTIC_USERNAME}'
     password: '${ELASTIC_PASSWORD}'
+    
+setup.dashboards:
+  enabled: true
+  # index: "${LOCAL_HOSTNAME}-logs"
 
 #==================================== Monitoring =====================================
 # Enable Monitoring Beats
