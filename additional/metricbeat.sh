@@ -11,5 +11,5 @@ cp additional/config/metricbeat.yml ${basedir}/${metricbeat_version}
 
 # setup Kibana dashboards and start metricbeat
 cd ${basedir}/${metricbeat_version}
-metricbeat setup -e
-metricbeat -e
+./metricbeat setup -e
+./metricbeat -e
