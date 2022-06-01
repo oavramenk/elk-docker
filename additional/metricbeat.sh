@@ -2,7 +2,7 @@
 
 readonly basedir=/opt/beats
 
-curl -L -o --create-dirs ${basedir} https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-8.2.0-linux-x86_64.tar.gz
+curl -L https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-8.2.0-linux-x86_64.tar.gz -o --create-dirs ${basedir}
 tar xzvf ${basedir}/metricbeat-8.2.0-linux-x86_64.tar.gz -C ${basedir}/metricbeat
 
 # Copy configuration file for metricbeat
