@@ -9,6 +9,7 @@ services:
     image: docker.elastic.co/beats/metricbeat:${ELK_VERSION}
     # https://github.com/docker/swarmkit/issues/1951
     hostname: "${HOSTNAME}-metricbeat"
+    restart: always
     user: root
     volumes:
       - ./metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro

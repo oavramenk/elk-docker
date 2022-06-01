@@ -25,10 +25,6 @@ filebeat.inputs:
   fields:
     event.dataset: my-app 
     # fields_under_root: true
-  json:
-    keys_under_root: true
-    overwrite_keys: true
-    message_key: 'message'
 
 #================================ Processors ===================================
 processors:
@@ -38,9 +34,6 @@ processors:
     format: offset
 - add_host_metadata:
     netinfo.enabled: true
-- decode_json_fields:
-      fields: ['message']
-      target: json
 
 # Change index
 
