@@ -40,7 +40,7 @@ output:
   elasticsearch:
     hosts: ["https://34.244.8.170:9200"]
     username: elastic
-    password: cnahgeme
+    password: changeme
     ssl:
       enabled: true
       verification_mode: none
@@ -55,7 +55,7 @@ setup:
   kibana:
     host: "https://34.244.8.170:5601"
     username: elastic
-    password: cnahgeme
+    password: changeme
     ssl:
       enabled: true
       verification_mode: none
