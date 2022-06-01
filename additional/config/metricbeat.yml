@@ -38,9 +38,9 @@ processors:
 #========================== Elasticsearch output ===============================
 output:
   elasticsearch:
-    hosts: ["${ELASTICSEARCH_HOST_PORT}"]
-    username: ${ELASTIC_USERNAME}
-    password: ${ELASTIC_PASSWORD}
+    hosts: ["https://34.244.8.170:9200"]
+    username: elastic
+    password: cnahgeme
     ssl:
       enabled: true
       verification_mode: none
@@ -53,9 +53,9 @@ output:
 #============================== Kibana =========================================
 setup:
   kibana:
-    host: "${KIBANA_HOST_PORT}"
-    username: ${ELASTIC_USERNAME}
-    password: ${ELASTIC_PASSWORD}
+    host: "https://34.244.8.170:5601"
+    username: elastic
+    password: cnahgeme
     ssl:
       enabled: true
       verification_mode: none
