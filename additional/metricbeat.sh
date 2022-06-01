@@ -1,13 +1,14 @@
 #!/bin/bash
 
 readonly basedir=/opt/beats
+readonly metricbeat_version=metricbeat-8.2.0-linux-x86_64
 
-curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-8.2.0-linux-x86_64.tar.gz
-mkdir -p ${basedir}/metricbeat && tar xzvf metricbeat-8.2.0-linux-x86_64.tar.gz -C ${basedir}/metricbeat
+curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/${metricbeat_version}.tar.gz
+mkdir -p ${basedir} && tar xzvf ${metricbeat_version}.tar.gz -C ${basedir}
 
 # Copy configuration file for metricbeat
-cp additional/config/metricbeat.yml ${basedir}/metricbeat
+cp additional/config/metricbeat.yml ${basedir}/${metricbeat_version}
 
 # setup Kibana dashboards and start metricbeat
-metricbeat setup -e
-${basedir}/metricbeat/metricbeat -e
+${basedir}/${metricbeat_version}/metricbeat setup -e
+${basedir}/${metricbeat_version}/metricbeat -e
