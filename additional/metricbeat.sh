@@ -10,5 +10,6 @@ mkdir -p ${basedir} && tar xzvf ${metricbeat_version}.tar.gz -C ${basedir}
 cp additional/config/metricbeat.yml ${basedir}/${metricbeat_version}
 
 # setup Kibana dashboards and start metricbeat
-${basedir}/${metricbeat_version}/metricbeat setup -e
-${basedir}/${metricbeat_version}/metricbeat -e
+cd ${basedir}/${metricbeat_version}
+metricbeat setup -e
+metricbeat -e
