@@ -1,14 +1,17 @@
 .DEFAULT_GOAL:=help
 
 COMPOSE_ALL_FILES := -f docker-compose.yml -f docker-compose.monitor.yml -f docker-compose.tools.yml -f docker-compose.nodes.yml -f docker-compose.logs.yml
+COMPOSE_MONITORING := -f docker-compose.yml -f docker-compose.monitor.yml
+COMPOSE_LOGGING := -f docker-compose.yml -f docker-compose.logs.yml
 COMPOSE_MONITORING_AGENT := -f docker-compose.metrics.yml
 COMPOSE_LOGGING_AGENT := -f docker-compose.logs.yml
 COMPOSE_TOOLS := -f docker-compose.yml -f docker-compose.tools.yml
 COMPOSE_NODES := -f docker-compose.yml -f docker-compose.nodes.yml
 ELK_SERVICES   := elasticsearch logstash kibana
 ELK_LOG_COLLECTION := filebeat
-ELK_MONITORING := metricbeat
-# ELK_MONITORING := elasticsearch-exporter logstash-exporter filebeat-cluster-logs
+ELK_MONITORING := elasticsearch-exporter logstash-exporter filebeat-cluster-logs
+ELK_LOG_COLLECTION_AGENT := filebeat
+ELK_MONITORING_AGENT := metricbeat
 ELK_TOOLS  := rubban
 ELK_NODES := elasticsearch-1 elasticsearch-2
 ELK_MAIN_SERVICES := ${ELK_SERVICES} ${ELK_MONITORING} ${ELK_TOOLS}
@@ -41,10 +44,13 @@ monitoring:		## Start ELK Monitoring.
 	@docker-compose ${COMPOSE_MONITORING} up -d --build ${ELK_MONITORING}
 
 collect-docker-logs:		## Start Filebeat that collects all Host Docker Logs and ship it to ELK
-	@docker-compose ${COMPOSE_LOGGING_AGENT} up -d --build ${ELK_LOG_COLLECTION}
+	@docker-compose ${COMPOSE_LOGGING} up -d --build ${ELK_LOG_COLLECTION}
 
-collect-docker-metrics:		## Start Metricbeat that collects all Host Docker metrics and ship it to ELK
-	@docker-compose ${COMPOSE_MONITORING_AGENT} up -d --build ${ELK_MONITORING}
+collect-docker-logs-agent:		
+	@docker-compose ${COMPOSE_LOGGING_AGENT} up -d --build ${ELK_LOG_COLLECTION_AGENT}
+
+collect-docker-metrics-agent:		
+	@docker-compose ${COMPOSE_MONITORING_AGENT} up -d --build ${ELK_MONITORING_AGENT}
 
 tools:		    ## Start ELK Tools (ElastAlert, Curator).
 	@docker-compose ${COMPOSE_TOOLS} up -d --build ${ELK_TOOLS}

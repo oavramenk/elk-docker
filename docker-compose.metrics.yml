@@ -4,10 +4,9 @@ volumes:
   metricbeat:
 
 services:
-
+  # Docker Metrics Shipper ------------------------------
   metricbeat:
     image: docker.elastic.co/beats/metricbeat:${ELK_VERSION}
-    # https://github.com/docker/swarmkit/issues/1951
     hostname: "${HOSTNAME}-metricbeat"
     restart: always
     user: root
@@ -23,5 +22,5 @@ services:
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
       KIBANA_HOST_PORT: https://${KIBANA_HOST_PUB}:${KIBANA_PORT_PUB}
       ELASTICSEARCH_HOST_PORT: https://${ELASTICSEARCH_HOST_PUB}:${ELASTICSEARCH_PORT_PUB}
-    # disable strict permission checks
+    # disable strict permission checks: https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html
     command: ["--strict.perms=false", "-system.hostfs=/hostfs"]

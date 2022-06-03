@@ -1,6 +1,5 @@
 version: '3.5'
 
-# will contain all elasticsearch data.
 volumes:
   filebeat-data:
 
@@ -10,20 +9,22 @@ services:
     image: docker.elastic.co/beats/filebeat:${ELK_VERSION}
     hostname: "${HOSTNAME}-filebeat"
     restart: always
-    # -e flag to log to stderr and disable syslog/file output
-    command: -e --strict.perms=false
     user: root
+    volumes:
+      - ./filebeat/filebeat.logs.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # system and audit logs
+      - /var/log/:/var/log/:ro
+      - /var/log/audit/:/var/log/audit/:ro
+      # custom logs and filebeat data
+      - /home/oleh/study/elk:/custom-app/log
+      - filebeat-data:/var/lib/filebeat/data
     environment:
       ELASTIC_USERNAME: ${ELASTIC_USERNAME}
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
       KIBANA_HOST_PORT: https://${KIBANA_HOST_PUB}:${KIBANA_PORT_PUB}
       LOGSTASH_HOST_PORT: ${LOGSTASH_HOST_PUB}:${LOGSTASH_PORT_PUB}
       ELASTICSEARCH_HOST_PORT: https://${ELASTICSEARCH_HOST_PUB}:${ELASTICSEARCH_PORT_PUB}
-    volumes:
-      - ./filebeat/filebeat.logs.yml:/usr/share/filebeat/filebeat.yml:ro
-      # - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      # - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /var/log/:/var/log/:ro
-      - /var/log/audit/:/var/log/audit/:ro
-      - filebeat-data:/var/lib/filebeat/data
-      - /home/ec2-user/test:/my-logs/log
+    # disable strict permission checks: https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html
+    command: -e --strict.perms=false
