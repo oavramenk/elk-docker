@@ -14,11 +14,12 @@ services:
       - ./filebeat/filebeat.logs.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      # system and audit logs
+      # system, audit and nginx logs
       - /var/log/:/var/log/:ro
       - /var/log/audit/:/var/log/audit/:ro
+      - /var/log/nginx/:/var/log/nginx/:ro
       # custom logs and filebeat data
-      - /home/oleh/study/elk:/custom-app/log
+      - /home/ec2-user/agent/test:/custom-app/log
       - filebeat-data:/var/lib/filebeat/data
     environment:
       ELASTIC_USERNAME: ${ELASTIC_USERNAME}

@@ -7,6 +7,14 @@ filebeat.modules:
 - module: auditd
   log:
     enabled: true
+# Example with nginx
+- module: nginx
+  access:
+    enabled: true
+    var.paths: ["/var/log/nginx/access.log*"]
+  error:
+    enabled: true
+    var.paths: ["/var/log/nginx/error.log*"]
 
 # --------------------------- Filebeat autodiscover ------------------------
 
@@ -41,6 +49,8 @@ processors:
 output.elasticsearch.index: "filebeat-%{[agent.version]}"
 setup.template.name: "filebeat"
 setup.template.pattern: "filebeat-%{[agent.version]}"
+
+setup.ilm.policy_name: filebeat
 
 # --------------------------- Output to Logstash ----------------------------
 
