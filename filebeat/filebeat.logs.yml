@@ -70,9 +70,9 @@ setup:
 
 # ---------------------------- Dashboards --------------------------------
 
-setup.dashboards:
-  enabled: true
-  index: "logstash-*"
+# setup.dashboards:
+#   enabled: true
+#   index: "logstash-*"
 
 # ---------------------------= Xpack Monitoring ---------------------------
 
